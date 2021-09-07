@@ -1,6 +1,7 @@
 package com.example.githubusers.domain.usecases
 
 import com.example.githubusers.domain.models.User
+import com.example.githubusers.domain.models.UserItems
 import io.kotest.matchers.result.shouldBeFailure
 import io.kotest.matchers.result.shouldBeSuccess
 import io.kotest.matchers.shouldBe
@@ -13,7 +14,6 @@ import org.junit.Test
 
 class SearchUsersTest : UseCaseBaseTest() {
     lateinit var searchUsers: SearchUsers
-
 
     @Before
     override fun setup() {
@@ -30,8 +30,8 @@ class SearchUsersTest : UseCaseBaseTest() {
     fun `SearchUsers should return success`() {
         //given
         val searchParams = SearchUsers.Params("Test", 1)
-        coEvery { gitHubUserRepository.searchUsers(any(), any()) } returns Result.success(userList)
-        var result: Result<List<User>>? = null
+        coEvery { gitHubUserRepository.searchUsers(any(), any()) } returns Result.success(userItems)
+        var result: Result<UserItems>? = null
 
 
         //when
@@ -48,7 +48,7 @@ class SearchUsersTest : UseCaseBaseTest() {
         }
         result shouldNotBe null
         result!!.shouldBeSuccess()
-        result!!.getOrNull() shouldBe userList
+        result!!.getOrNull() shouldBe userItems
     }
 
     @Test
@@ -60,7 +60,7 @@ class SearchUsersTest : UseCaseBaseTest() {
                 any()
             )
         } returns Result.failure(error)
-        var result: Result<List<User>>? = null
+        var result: Result<UserItems>? = null
         val searchParams = SearchUsers.Params("Test", 1)
 
         //when
@@ -81,8 +81,11 @@ class SearchUsersTest : UseCaseBaseTest() {
     }
 
     private companion object {
-        val userList = listOf(
-            User(1, "name", "url")
+        val userItems = UserItems(
+            users = listOf(
+                User(1, "name", "url")
+            ),
+            totalItems = 10
         )
         val error = Throwable("ERROR_MESSAGE")
     }

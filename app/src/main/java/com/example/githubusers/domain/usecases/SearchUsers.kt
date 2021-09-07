@@ -1,6 +1,7 @@
 package com.example.githubusers.domain.usecases
 
 import com.example.githubusers.domain.models.User
+import com.example.githubusers.domain.models.UserItems
 import com.example.githubusers.domain.repositories.GitHubUserRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
@@ -10,7 +11,7 @@ class SearchUsers(
     ioDispatcher: CoroutineDispatcher,
     coroutineScope: CoroutineScope,
     private val gitHubUserRepository: GitHubUserRepository
-) : UseCase<List<User>, SearchUsers.Params>(
+) : UseCase<UserItems, SearchUsers.Params>(
     mainDispatcher, ioDispatcher, coroutineScope
 ) {
 
@@ -19,7 +20,7 @@ class SearchUsers(
         val page: Int,
     )
 
-    override suspend fun run(params: Params): Result<List<User>> {
+    override suspend fun run(params: Params): Result<UserItems> {
         return gitHubUserRepository.searchUsers(
             keywords = params.keywords,
             page = params.page
