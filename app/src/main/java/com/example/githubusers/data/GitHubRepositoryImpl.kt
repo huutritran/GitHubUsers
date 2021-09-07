@@ -5,8 +5,10 @@ import com.example.githubusers.data.entities.toUserItemsModel
 import com.example.githubusers.domain.models.UserDetail
 import com.example.githubusers.domain.models.UserItems
 import com.example.githubusers.domain.repositories.GitHubUserRepository
+import javax.inject.Inject
 
-class GitHubRepositoryImpl(
+
+class GitHubRepositoryImpl @Inject constructor(
     private val api: GitHubApi
 ) : GitHubUserRepository {
 

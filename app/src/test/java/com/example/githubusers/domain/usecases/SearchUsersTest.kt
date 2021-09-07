@@ -21,7 +21,6 @@ class SearchUsersTest : UseCaseBaseTest() {
         searchUsers = SearchUsers(
             mainDispatcher,
             ioDispatcher,
-            scope,
             gitHubUserRepository
         )
     }
@@ -36,7 +35,7 @@ class SearchUsersTest : UseCaseBaseTest() {
 
         //when
         runBlocking {
-            searchUsers(searchParams) { result = it }
+            searchUsers(searchParams, scope) { result = it }
         }
 
         //then
@@ -65,7 +64,7 @@ class SearchUsersTest : UseCaseBaseTest() {
 
         //when
         runBlocking {
-            searchUsers(searchParams) { result = it }
+            searchUsers(searchParams, scope) { result = it }
         }
 
         //then

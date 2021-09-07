@@ -8,9 +8,8 @@ import kotlinx.coroutines.CoroutineScope
 class GetUserDetail(
     mainDispatcher: CoroutineDispatcher,
     ioDispatcher: CoroutineDispatcher,
-    coroutineScope: CoroutineScope,
     private val gitHubUserRepository: GitHubUserRepository
-) : UseCase<UserDetail, GetUserDetail.Params>(mainDispatcher, ioDispatcher, coroutineScope) {
+) : UseCase<UserDetail, GetUserDetail.Params>(mainDispatcher, ioDispatcher) {
 
     override suspend fun run(params: Params): Result<UserDetail> {
         return gitHubUserRepository.getUserDetail(userName = params.userName)

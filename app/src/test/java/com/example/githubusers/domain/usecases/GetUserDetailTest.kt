@@ -20,7 +20,6 @@ class GetUserDetailTest : UseCaseBaseTest() {
         getUserDetail = GetUserDetail(
             mainDispatcher,
             ioDispatcher,
-            scope,
             gitHubUserRepository
         )
     }
@@ -34,7 +33,7 @@ class GetUserDetailTest : UseCaseBaseTest() {
 
         //when
         runBlocking {
-            getUserDetail(userDetailParams) { result = it }
+            getUserDetail(userDetailParams, scope) { result = it }
         }
 
         //then
@@ -58,7 +57,7 @@ class GetUserDetailTest : UseCaseBaseTest() {
 
         //when
         runBlocking {
-            getUserDetail(userDetailParams) { result = it }
+            getUserDetail(userDetailParams, scope) { result = it }
         }
 
         //then

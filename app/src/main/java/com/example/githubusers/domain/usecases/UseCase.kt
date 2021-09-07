@@ -8,13 +8,13 @@ import kotlinx.coroutines.launch
 abstract class UseCase<out Type, in Params>(
     private val mainDispatcher: CoroutineDispatcher,
     private val ioDispatcher: CoroutineDispatcher,
-    private val coroutineScope: CoroutineScope,
 ) where Type : Any {
 
     abstract suspend fun run(params: Params): Result<Type>
 
     operator fun invoke(
         params: Params,
+        coroutineScope: CoroutineScope,
         onResult: (Result<Type>) -> Unit = {}
     ) {
         coroutineScope.launch(mainDispatcher) {
