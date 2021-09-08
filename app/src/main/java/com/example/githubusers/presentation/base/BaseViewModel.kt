@@ -8,7 +8,7 @@ abstract class BaseViewModel : ViewModel() {
     val isLoading = SingleLiveEvent<Boolean>()
 
 
-    open fun onFailure(throwable: Throwable) {
+    protected open fun onFailure(throwable: Throwable) {
         //TODO handling error here
         errorMessage.value = throwable.message.orEmpty()
     }
