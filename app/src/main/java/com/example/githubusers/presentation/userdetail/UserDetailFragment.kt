@@ -49,7 +49,7 @@ class UserDetailFragment : Fragment() {
     }
 
     private fun subscribeData() {
-        viewModel.error.observe(viewLifecycleOwner, { message -> toast(message) })
+        viewModel.errorMessage.observe(viewLifecycleOwner, { message -> toast(message) })
         viewModel.userDetail.observe(viewLifecycleOwner, { userDetail ->
 
             with(userDetail) {

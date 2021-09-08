@@ -1,15 +1,13 @@
 package com.example.githubusers.presentation.searchusers
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.githubusers.domain.models.User
 import com.example.githubusers.domain.models.UserItems
 import com.example.githubusers.domain.usecases.SearchUsers
+import com.example.githubusers.presentation.base.BaseViewModel
 import com.example.githubusers.util.Constants
-import com.example.githubusers.util.SingleLiveEvent
 import com.example.githubusers.util.addAllAndNotify
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -17,18 +15,13 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchUsersViewModel @Inject constructor(
     private val searchUsers: SearchUsers
-) : ViewModel() {
+) : BaseViewModel() {
     val users: LiveData<List<User>>
         get() = _users
     private val _users = MutableLiveData<List<User>>()
 
-    val errorMessage = SingleLiveEvent<String>()
-    val isLoading = SingleLiveEvent<Boolean>()
     val isLastPage = MutableLiveData<Boolean>()
 
-    init {
-        Log.d("SearchUsersViewModel", "init")
-    }
 
     private var pageNumber = 1
     private var keywordsTemp: String = ""
@@ -62,10 +55,6 @@ class SearchUsersViewModel @Inject constructor(
             this.isLastPage.value = false
         }
         _users.addAllAndNotify(userItems.users)
-    }
-
-    private fun onFailure(throwable: Throwable) {
-        errorMessage.value = throwable.message.orEmpty()
     }
 
     private fun checkLastPage(currentPage: Int, totalItems: Int): Boolean {
