@@ -1,10 +1,8 @@
 package com.example.githubusers
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.githubusers.presentation.searchusers.SearchUsersFragment
-import com.example.githubusers.presentation.searchusers.SearchUsersViewModel
 import com.example.githubusers.presentation.userdetail.UserDetailFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,7 +13,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         showUserList()
-
     }
 
     private fun showUserList() {

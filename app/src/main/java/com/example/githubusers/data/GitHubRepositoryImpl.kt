@@ -13,7 +13,7 @@ class GitHubRepositoryImpl @Inject constructor(
 ) : GitHubUserRepository {
 
     override suspend fun searchUsers(keywords: String, page: Int): Result<UserItems> {
-        val searchKey = "${keywords} in:login:"
+        val searchKey = "$keywords in:login:"
         return kotlin.runCatching {
             api.searchUsers(searchKey, page).toUserItemsModel().let {
                 Result.success(it)

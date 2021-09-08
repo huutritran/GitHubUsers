@@ -1,7 +1,5 @@
 package com.example.githubusers.presentation.searchusers
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +15,7 @@ import com.example.githubusers.MainActivity
 import com.example.githubusers.R
 import com.example.githubusers.util.addLoadMoreListener
 import com.example.githubusers.util.hideKeyboard
+import com.example.githubusers.util.openInBrowser
 import com.example.githubusers.util.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_search_users.*
@@ -25,7 +24,7 @@ import kotlinx.android.synthetic.main.fragment_search_users.*
 @AndroidEntryPoint
 class SearchUsersFragment : Fragment() {
 
-    private val viewModel: SearchUsersViewModel by viewModels()
+    private val viewModel: SearchUsersViewModel by viewModels({requireActivity()})
     private lateinit var adapter: UserAdapter
 
     override fun onCreateView(
@@ -131,11 +130,4 @@ class SearchUsersFragment : Fragment() {
             (activity as MainActivity).showUserDetail(userName)
         }
     }
-
-    private fun openInBrowser(url: String) {
-        Intent(Intent.ACTION_VIEW).apply {
-            data = Uri.parse(url)
-        }.also { startActivity(it) }
-    }
-
 }

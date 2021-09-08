@@ -2,6 +2,8 @@ package com.example.githubusers.util
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.text.Html
 import android.view.View
@@ -54,4 +56,10 @@ fun TextView.showAsLink(url: String) {
 
 fun Fragment.toast(message: CharSequence) = context?.let {
     Toast.makeText(it, message, Toast.LENGTH_SHORT).show()
+}
+
+fun Fragment.openInBrowser(url: String) {
+    Intent(Intent.ACTION_VIEW).apply {
+        data = Uri.parse(url)
+    }.also { startActivity(it) }
 }

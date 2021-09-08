@@ -80,7 +80,8 @@ class GetUserDetailTest : UseCaseBaseTest() {
             publicRepos = 1,
             followers = 2,
             following = 3,
-            location = "location"
+            location = "location",
+            html = "html"
         )
         val error = Throwable("ERROR_MESSAGE")
     }

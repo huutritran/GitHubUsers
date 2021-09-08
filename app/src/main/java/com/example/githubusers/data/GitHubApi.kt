@@ -17,7 +17,7 @@ interface GitHubApi {
     ): SearchUsersResult
 
     @GET("users/{username}")
-    fun getUserDetail(
+    suspend fun getUserDetail(
         @Path("username") userName: String
     ): UserDetailEntity
 

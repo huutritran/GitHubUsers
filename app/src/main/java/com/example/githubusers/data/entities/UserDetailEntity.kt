@@ -22,13 +22,13 @@ data class UserDetailEntity(
     @SerializedName("received_events_url") val received_events_url: String,
     @SerializedName("type") val type: String,
     @SerializedName("site_admin") val site_admin: Boolean,
-    @SerializedName("name") val name: String,
+    @SerializedName("name") val name: String?,
     @SerializedName("company") val company: String,
     @SerializedName("blog") val blog: String,
-    @SerializedName("location") val location: String,
-    @SerializedName("email") val email: String,
+    @SerializedName("location") val location: String?,
+    @SerializedName("email") val email: String?,
     @SerializedName("hireable") val hireable: Boolean,
-    @SerializedName("bio") val bio: String,
+    @SerializedName("bio") val bio: String?,
     @SerializedName("twitter_username") val twitter_username: String,
     @SerializedName("public_repos") val public_repos: Int,
     @SerializedName("public_gists") val public_gists: Int,
@@ -49,6 +49,7 @@ fun UserDetailEntity.toUserDetailModel(): UserDetail {
         publicRepos = public_repos,
         followers = followers,
         following = following,
-        location = location
+        location = location,
+        html = html_url
     )
 }

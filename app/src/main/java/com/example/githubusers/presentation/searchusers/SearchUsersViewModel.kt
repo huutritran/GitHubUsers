@@ -1,5 +1,6 @@
 package com.example.githubusers.presentation.searchusers
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,6 +26,9 @@ class SearchUsersViewModel @Inject constructor(
     val isLoading = SingleLiveEvent<Boolean>()
     val isLastPage = MutableLiveData<Boolean>()
 
+    init {
+        Log.d("SearchUsersViewModel", "init")
+    }
 
     private var pageNumber = 1
     private var keywordsTemp: String = ""
