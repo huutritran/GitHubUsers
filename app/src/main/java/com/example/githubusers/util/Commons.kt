@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 
 fun <T> MutableLiveData<List<T>>.addAllAndNotify(items: List<T>) {
     value = when {
-        value!!.isEmpty() -> {
+        value.isNullOrEmpty() -> {
             items
         }
         else -> {
