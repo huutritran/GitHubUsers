@@ -82,7 +82,7 @@ class SearchUsersTest : UseCaseBaseTest() {
     private companion object {
         val userItems = UserItems(
             users = listOf(
-                User(1, "name", "url")
+                User(1, "name", "url", 0, "html")
             ),
             totalItems = 10
         )

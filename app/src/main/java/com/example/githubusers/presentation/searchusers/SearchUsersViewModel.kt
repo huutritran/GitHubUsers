@@ -8,6 +8,8 @@ import com.example.githubusers.domain.models.User
 import com.example.githubusers.domain.models.UserItems
 import com.example.githubusers.domain.usecases.SearchUsers
 import com.example.githubusers.util.Constants
+import com.example.githubusers.util.SingleLiveEvent
+import com.example.githubusers.util.addAllAndNotify
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -19,15 +21,25 @@ class SearchUsersViewModel @Inject constructor(
         get() = _users
     private val _users = MutableLiveData<List<User>>()
 
-    val errorMessage = MutableLiveData<String>()
-    val isLoading = MutableLiveData<Boolean>()
+    val errorMessage = SingleLiveEvent<String>()
+    val isLoading = SingleLiveEvent<Boolean>()
+    val isLastPage = MutableLiveData<Boolean>()
+
 
     private var pageNumber = 1
+    private var keywordsTemp: String = ""
 
+    fun resetSearch() {
+        keywordsTemp = ""
+        pageNumber = 1
+        isLastPage.value = false
+        _users.value = emptyList()
+    }
 
-    fun searchUsers(keywords: String) {
+    fun searchUsers(keywords: String = keywordsTemp) {
         val params = SearchUsers.Params(keywords, pageNumber)
         isLoading.value = true
+        keywordsTemp = keywords
         searchUsers(params, viewModelScope) {
             isLoading.value = false
             it
@@ -36,16 +48,16 @@ class SearchUsersViewModel @Inject constructor(
         }
     }
 
-    fun hasData() : Boolean {
-        return _users.value?.isNotEmpty() ?: false
-    }
+    fun getCurrentPage(): Int = pageNumber
 
     private fun onSuccess(userItems: UserItems) {
-        val isLastPage = checkLastPage(pageNumber, userItems.totalItems)
-        if (!isLastPage) {
+        if (checkLastPage(pageNumber, userItems.totalItems)) {
+            this.isLastPage.value = true
+        } else {
             pageNumber += 1
+            this.isLastPage.value = false
         }
-        _users.value = userItems.users
+        _users.addAllAndNotify(userItems.users)
     }
 
     private fun onFailure(throwable: Throwable) {

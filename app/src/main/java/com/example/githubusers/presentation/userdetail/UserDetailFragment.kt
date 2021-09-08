@@ -24,12 +24,16 @@ class UserDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_user_detail, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+    }
+
     companion object {
-        private const val ARG_USERNAME= "param2"
+        private const val ARG_USERNAME= "ARG_USERNAME"
         fun newInstance(useName: String) =
             UserDetailFragment().apply {
                 arguments = Bundle().apply {

@@ -28,13 +28,17 @@ data class UserEntity(
     @SerializedName("url")
     val url: String,
     @SerializedName("html_url")
-    val html_url: String
+    val html_url: String,
+    @SerializedName("score")
+    val score: Int
 )
 
 fun UserEntity.toUserModel(): User {
     return User(
         id = id,
         name = login,
-        avatarUrl = avatar_url
+        avatarUrl = avatar_url,
+        score = score,
+        html = html_url
     )
 }
