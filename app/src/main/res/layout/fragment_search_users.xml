@@ -37,24 +37,36 @@
             android:textColor="@color/search_text"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/imgSearch"
+            app:layout_constraintEnd_toStartOf="@id/imgSearchContainer"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="Autofill,SpeakableTextPresentCheck" />
+            tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck" />
 
-        <ImageView
-            android:id="@+id/imgSearch"
-            android:layout_width="@dimen/search_bar_icon_size"
-            android:layout_height="@dimen/search_bar_icon_size"
-            android:layout_marginEnd="16dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
+        <LinearLayout
+            android:gravity="center"
             android:clickable="true"
-            android:contentDescription="@string/search_icon_description"
-            android:focusable="true"
-            android:src="@drawable/ic_baseline_search_24"
+            android:id="@+id/imgSearchContainer"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="@dimen/search_bar_height"
+            android:layout_height="@dimen/search_bar_height"
+            android:layout_marginEnd="16dp"
+            android:focusable="true">
+            <ImageView
+                android:contextClickable="false"
+                android:id="@+id/imgSearch"
+                android:layout_width="@dimen/search_bar_icon_size"
+                android:layout_height="@dimen/search_bar_icon_size"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="false"
+                android:contentDescription="@string/search_icon_description"
+                android:src="@drawable/ic_baseline_search_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

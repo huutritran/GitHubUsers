@@ -43,7 +43,7 @@ class SearchUsersFragment : Fragment() {
 
     private fun setupControls() {
         rvUsers.visibility = View.GONE
-        imgSearch.setOnClickListener {
+        imgSearchContainer.setOnClickListener {
             clearAndSearch()
         }
         etSearch.setOnEditorActionListener { _, _, _ ->
